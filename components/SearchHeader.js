@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import React, {useRef} from "react";
 import {MicrophoneIcon, SearchIcon, XIcon} from "@heroicons/react/solid";
 import User from "./User";
+import SearchHeaderOptions from "./SearchHeaderOptions";
 const SearchHeader = () => {
 	const router = useRouter();
 	const searchInputRef = useRef(null);
@@ -10,7 +11,7 @@ const SearchHeader = () => {
 		event.preventDefault();
 		const term = searchInputRef.current.value;
 		if (!term) return;
-		router.push(`/search?term=${term}`);
+		router.push(`/search?term=${term}&searchType=`);
 	};
 	return (
 		<header className="sticky top-0 bg-white">
@@ -23,7 +24,7 @@ const SearchHeader = () => {
 					onClick={() => router.push("/")}
 					className="cursor-pointer"
 				/>
-				<form className="flex border border-gray-200 rounded-full shadow-lg px-6 p-y ml-10 mr-5 flex-grow max-w-3xl items-center">
+				<form className="flex border border-gray-200 rounded-full shadow-lg px-6 py-3 ml-10 mr-5 flex-grow max-w-3xl items-center">
 					<input
 						type="text"
 						defaultValue={router.query.term}
@@ -45,6 +46,7 @@ const SearchHeader = () => {
 
 				<User className="ml-auto whitespace-nowrap" />
 			</div>
+			<SearchHeaderOptions />
 		</header>
 	);
 };
