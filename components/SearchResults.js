@@ -29,8 +29,8 @@ const SearchResults = ({results}) => {
 							</h2>
 						</a>
 					</div>
-
-					<p className="text-gray-700">{Parser(item.htmlSnippet)}</p>
+					{/* 
+					<p className="text-gray-700">{Parser(item.htmlSnippet)}</p> */}
 				</div>
 			))}
 		</div>
