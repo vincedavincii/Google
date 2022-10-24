@@ -25,7 +25,7 @@ const search = ({results}) => {
 };
 
 export async function getServerSideProps(context) {
-	const mockData = true;
+	const mockData = false;
 	const data = mockData
 		? Response
 		: await fetch(
