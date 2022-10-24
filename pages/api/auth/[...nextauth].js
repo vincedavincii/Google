@@ -10,9 +10,9 @@ export const authOptions = {
 
 		// ...add more providers here
 	],
+	secret: process.env.SECRET,
 	pages: {
 		signIn: "/auth/signin",
 	},
-	secret: "nmLAx7XUvAH2ThIE6zl/dDDfSFhQJYk5LJ9VOmw4f8w=",
 };
 export default NextAuth(authOptions);
