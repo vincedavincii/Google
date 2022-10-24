@@ -1,13 +1,13 @@
 import Head from "next/head";
 import {useRouter} from "next/router";
 import React from "react";
+import ImageResult from "../components/ImageResult";
 import SearchHeader from "../components/SearchHeader";
 import SearchResults from "../components/SearchResults";
 import Response from "../Response";
 
 const search = ({results}) => {
 	const router = useRouter();
-
 	return (
 		<div>
 			<Head>
@@ -18,13 +18,17 @@ const search = ({results}) => {
 			<SearchHeader />
 
 			{/* Search Results */}
-
-			<SearchResults results={results} />
+			{router.query.searchType === "image" ? (
+				<ImageResult results={results} />
+			) : (
+				<SearchResults results={results} />
+			)}
 		</div>
 	);
 };
 
 export async function getServerSideProps(context) {
+	const startIndex = context.query.start || "1";
 	const mockData = false;
 	const data = mockData
 		? Response
@@ -33,7 +37,7 @@ export async function getServerSideProps(context) {
 					process.env.API_KEY
 				}&cx=${process.env.CONTEXT_KEY}&q=${context.query.term}${
 					context.query.searchType && "&searchType=image"
-				}`
+				}&start=${startIndex}`
 		  ).then((response) => response.json());
 	return {
 		props: {
